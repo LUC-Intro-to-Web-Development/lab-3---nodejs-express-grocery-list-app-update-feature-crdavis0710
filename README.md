@@ -1,41 +1,75 @@
-# Assignment 2 - Express Routing + CRUD Operations using SQLite Database.
-For this second assignment, you will continue building out your application by implementing CRUD functionality using sqlite database.   
+#  Nodejs Express Grocery List App - Adding Update Feature (Lab 3)
+You are going to extend the functionality of an existing application by adding an update feature to the application provided. 
 
-## Deliverable 1 (10 Points)
-The project folder is configured with git and npm. You are welcome to scaffold your own folder structure or you can use the [express generator](https://expressjs.com/en/starter/generator.html) to quickly create an application skeleton. 
-- Git is initialized into the issued repository and the .gitignore file is configured to ignore the node_modules folder and any other file that is not needed in the remote repository.
-- The package.json file contains a list of all development/app dependencies
-- Application folder displays a hierarchal folder structure
+![Image of Lab 3 Functionality](https://instructorc.github.io/site/slides/logic/images/node/lab3-review.gif)
+## Requirements
 
-## Deliverable 2 - Routing and Middleware configuration (10 Points)
-For this deliverable, you will focus on implementing the necessary middleware needed to configure and route your application. Feel free to refer back to the [node.js](https://instructorc.github.io/site/slides/logic/nodejs.html) presentation for code samples and an explanation of concepts.
-- Middleware is implemented for static files such as images, pdf's, etc
-- Middleware is implemented for view templating engine
-- Middleware configured to parse JSON data and interpret form data.  Implement the following code below to meet requirement.
-``` javascript
- // parse application/json
-app.use(express.json());
+### Step 1 - Setup project folder and start-up server
+1.  Pull down the contents of your assigned repository and install the necessary dependencies need to run the application.  The package.json file has already been created and identifies the packages your repository will depend upon.
+2.  Start the server and make sure you are able to create and delete grocery items.
 
-// For parsing application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }));
-```
+### Step 2 - Adjust the front-end code to include an Update button
+Listed below are a few steps that will help you accomplish adding an Update button
+1.  Navigate to the link below and select a button to add to your HTML code.
+	1.  [Link to Bootstrap Button Options](https://getbootstrap.com/docs/4.0/components/buttons/)
+    2.  Select one of the from the  For example, in the code below, I selected the warning button and added the text **"Update"** between the opening and closing button element.
+        ```html
+         <button type="button" class="btn btn-warning">Update</button>
+        ```
 
-- Application has a minimum of 5 routes implemented
-  1.  A minimum of three routes should accept data. Both the GET and POST methods will need to be represented in your routing functions
-  2.  A minimum of three routes should render data back to the client/user interface.
- 
- 
+	3.  Add a new form element similar to the delete button and add the button as a child element. Your code should look similar to what's below.
+        ```html
+         <form action="/[ADD YOUR OWN UPDATE PATH]" method="[ADD THE TYPE OF METHOD YOU PREFER - EITHER GET OR POST">
+            <button name="deleterecord" id="deletenow" type="submit" class="btn btn-danger" value="{{this.itemID}}">DELETE</button>
+         </form>
+        ```
+	4. You will need to update the action path and method values based on how you create your route in step 3.
+    5. Make sure your update button has ```{{this.itemID}}``` specified for the value.  This is necessary so that we identify which record to update.
+2.  Save your code start up the server and visual inspect to make sure the button properly displays next to the delete button. 
 
-## Deliverable 3 - Database implementation (10 Points)
-- Your application contains a file titled "database.js" and all of your SQL queries are listed and identified.
-- Your database.js file contains a minimum of 4 queries that represent the Create, Retrieve, Update and Delete (CRUD) functionality.
-- Database queries are represented within the routes and perform CRUD operations.
-- SQLite Database file is included within the project folder
+### Step 3 - Create the database function that allows you to execute the UPDATE SQL command
+1.  Navigate to the database.js file and include statements that will allow you to execute an update on a specific record. An example of what your route might look like is listed below.
+    ```javascript
+    let updateItem = (item_name, item_count, res) =>{
+	    var updateGroceryListItem = '[YOUR SQL STATEMENT]'
+
+	    db.run(updateGroceryListItem, function(err){
+
+	    })
+    }
+    ```
+2. Make sure your function properly makes a call to the database before implementing it into a route.
+3. Make sure the function is able to be exported to different files.
+### Step 4 - Define a Route/URL path
+1.  Navigate to the app.js and create a route that will allow you to update a selected item. An example of what your route might look like is listed below.
+    ```javascript
+      app.post('/update_item', function (req, res) {
+
+      })
+    ```
+		
+### Step 5 - Implement functionality to update a record. [Stretch Requirement]
+There are a number of ways you can go about achieving this objective.  Think creatively about a solution and plan out your logic before attempting to implement the functionality.  This would be a good opportunity to create a new branch and experiment with different ways in which you can allow a record to be updated.  Listed below are a few ideas to get you started.
+	
+1.  When the Update button is clicked, you can have the end-user navigate to a different page to re-enter and update grocery item information.
+
+2.  You can use the existing form used to create a record and change the action value to a new route. This would require the use of JavaScript and the ability to change the attribute value.
+	
+3. You can add an entirely new form on the index page that would be used solely to update a record.  This is probably the easiest way to implement functionality, but not user-friendly. 
 
 
-## Submission Guidelines
-Your project folder will need to be submitted to the assigned GitHub repository provided to you by the instructor. In Sakai, you will need to submit the link to your repository by the due date and time listed in the write-up. Make sure you receive confirmation from Sakai that your assignment has been submitted.
+### STEP 6 - Extra Credit (2 Points) 
+1.  Add a new column to your database table.  The new column will allow the end user to add a description for each item.
 
-## Date of Completeion
-12/2/2022
-CPST 342 - Prof. Fulton
+### STEP 7 - GitHub Repository
+1.  Adjust README.md file at the end to include the date of completion and course information.
+
+### STEP 8 - Submission
+1.  Comment your name to the app.js file and 
+2.  Make sure your master branch is clean and push up your final changes.
+3.  In Sakai, submit the URL to your repository
+
+### Lab Resources
+The lecture videos listed under week 5 will walk you through how the application is built.
+
+[SQLite Update Example](https://www.sqlitetutorial.net/sqlite-update/)
