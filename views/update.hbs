@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Update Christmas List Item</title>
+        <title>Family Grocery List</title>
          <meta charset="UTF-8">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <style>
@@ -14,13 +14,11 @@
                 border-collapse: collapse;
                 width: 100%;
                 }
-
                 td, th {
                 border: 1px solid #dddddd;
                 text-align: left;
                 padding: 8px;
                 }
-
                 tr:nth-child(even) {
                 background-color: #dddddd;
             }
@@ -28,23 +26,19 @@
     </head>
     <body>
         <div id="container">
-            <h1>{{app_title}} Generator</h1>
+            <h1>Family Grocery List</h1>
 
             
-            <!--Form to accept grocery data-->
-            <h2>Update Christmas Item:</h2>
+            <!--Form to update grocery data-->
+            <h2>Update Grocery Item:</h2>
             <form action="/confirm_update" method="POST">
-                <input type="text"  name="item_name" class="form-control" value="{{row.item_name}}"  placeholder="Enter Christmas item (ex. Motorcycle)" size="40"><br>
-                <input type="number"  name="item_count" class="form-control" value="{{row.item_priority}}" placeholder="Enter priority 1 - 5" size="60"><br>
-                <input type="hidden"  name="itemID" value="{{row.itemID}}">
+                <input type="text"  name="item_name" class="form-control"  placeholder="Enter grocery item (ex. Cereal)" value = "{{row.item_name}}" size="40"><br>
+                <input type="number"  name="item_count" class="form-control" placeholder="Enter quantity (ex. 2)" value = "{{row.item_count}}" size="60"><br>
+               <!--<input type="submit" name = "confirmupdate" class="btn btn-primary" value="submit" size = "60">-->
                 <button name="confirmupdate" id="confirmnow" type="confirm" class="btn btn-primary" value="{{row.itemID}}">CONFIRM</button>
-            </form>
+             </form>
 
-            
         </div>
-        <script>
-            
-        </script>
     </body>
 
 </html>

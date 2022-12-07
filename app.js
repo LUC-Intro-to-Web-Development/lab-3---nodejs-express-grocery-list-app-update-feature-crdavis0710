@@ -43,5 +43,24 @@ app.get('/', function (req, res) {
 	
  })
 
- 
+// ROUTE TO UPDATE GROCERY LIST ITEM
+app.post('/update_item', function (req, res) {
+	// Getting body parameters
+	const {updaterecord} = req.body;
+
+	dbOperations.getAItem(updaterecord, res);
+	
+	
+
+ })
+
+ app.post('/confirm_update', function (req, res) {
+	// Getting body parameters
+	const {item_name, item_count, confirmupdate} = req.body;
+
+
+	dbOperations.updateItem(item_name, item_count, confirmupdate, res);
+	
+ })
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))

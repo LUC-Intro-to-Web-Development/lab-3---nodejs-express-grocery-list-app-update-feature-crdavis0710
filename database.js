@@ -54,7 +54,7 @@ let getAllItems = (res) => {
             console.log(row.item_name);
           });*/
           console.log(rows);
-          res.render('index', {rows})
+            res.render('index', {rows})
 
     })
 }
@@ -80,4 +80,41 @@ let deleteItem = (recordToDelete, res) =>{
     getAllItems(res);
 }
 
-module.exports = {deleteItem, createItem, getAllItems}
+// Update Grocery Item
+let updateItem = (item_name, item_count, itemID, res) =>{
+    var updateGroceryItem = 'UPDATE grocery_item SET item_name = ?, item_count = ? WHERE itemID = ?';
+    var params = [item_name, item_count, itemID];
+
+	db.run(updateGroceryItem, params, function(err){
+		if (err){
+			return console.log(err.message);
+		}
+    
+
+        console.log("Grocery Item Updated");
+        console.log(`Rows updated ${this.changes}`);
+	});
+
+   getAllItems(res);
+
+}
+
+let getAItem = (aID, res) => {
+    var getAGroceryItem = 'SELECT itemID, item_name, item_count FROM grocery_item WHERE itemID = ?';
+    var params = [aID];
+    
+    db.get(getAGroceryItem, params, function(err, row){
+        if (err) {
+         
+            throw err;
+          }
+         // rows.forEach((row) => {
+           // console.log(row.item_name);
+         // });
+        console.log(row);
+        res.render('update', {row})
+
+    })
+}
+
+module.exports = {deleteItem, createItem, getAllItems, updateItem, getAItem}
